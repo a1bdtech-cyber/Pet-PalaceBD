@@ -11,17 +11,30 @@ export const STORE_SETTINGS: StoreSettings = {
   officeAddress: 'Banani, Dhaka-1213, Bangladesh'
 };
 
-export const HERO_BANNER_IMAGE = '/src/assets/images/hero_pet_palace_1792590998117.jpg';
-export const CAT_SALMON_IMAGE = '/src/assets/images/cat_nutrition_salmon_1792590998960.jpg';
-export const DOG_KIBBLE_IMAGE = '/src/assets/images/dog_royal_kibble_1792590999978.jpg';
-export const FARM_FEED_IMAGE = '/src/assets/images/farm_livestock_feed_1792590999553.jpg';
+import HERO_BANNER_IMAGE from '../assets/images/hero_pet_palace_1792590998117.jpg';
+import CAT_SALMON_IMAGE from '../assets/images/cat_nutrition_salmon_1792590998960.jpg';
+import DOG_KIBBLE_IMAGE from '../assets/images/dog_royal_kibble_1792590999978.jpg';
+import FARM_FEED_IMAGE from '../assets/images/farm_livestock_feed_1792590999553.jpg';
 
-export const CAT_AVATAR_IMAGE = '/src/assets/images/category_cat_real_1792656879141.jpg';
-export const DOG_AVATAR_IMAGE = '/src/assets/images/category_dog_real_1792656895840.jpg';
-export const BIRD_AVATAR_IMAGE = '/src/assets/images/category_bird_real_1792656913115.jpg';
-export const FISH_AVATAR_IMAGE = '/src/assets/images/category_fish_real_1792656931865.jpg';
-export const RABBIT_AVATAR_IMAGE = '/src/assets/images/category_rabbit_real_1792656945985.jpg';
-export const FARM_COW_AVATAR_IMAGE = '/src/assets/images/category_farm_cow_real_1792656962096.jpg';
+import CAT_AVATAR_IMAGE from '../assets/images/category_cat_real_1792656879141.jpg';
+import DOG_AVATAR_IMAGE from '../assets/images/category_dog_real_1792656895840.jpg';
+import BIRD_AVATAR_IMAGE from '../assets/images/category_bird_real_1792656913115.jpg';
+import FISH_AVATAR_IMAGE from '../assets/images/category_fish_real_1792656931865.jpg';
+import RABBIT_AVATAR_IMAGE from '../assets/images/category_rabbit_real_1792656945985.jpg';
+import FARM_COW_AVATAR_IMAGE from '../assets/images/category_farm_cow_real_1792656962096.jpg';
+
+export {
+  HERO_BANNER_IMAGE,
+  CAT_SALMON_IMAGE,
+  DOG_KIBBLE_IMAGE,
+  FARM_FEED_IMAGE,
+  CAT_AVATAR_IMAGE,
+  DOG_AVATAR_IMAGE,
+  BIRD_AVATAR_IMAGE,
+  FISH_AVATAR_IMAGE,
+  RABBIT_AVATAR_IMAGE,
+  FARM_COW_AVATAR_IMAGE
+};
 
 export const INITIAL_PRODUCTS: Product[] = [
   // CAT PRODUCTS

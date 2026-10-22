@@ -16,6 +16,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="module">
+      if (window.location.hostname.includes('github.io')) {
+        const s = document.createElement('script');
+        s.type = 'module';
+        s.crossOrigin = 'anonymous';
+        s.src = '/Pet-PalaceBD/assets/index-DG9xUTVW.js';
+        document.body.appendChild(s);
+
+        const l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.crossOrigin = 'anonymous';
+        l.href = '/Pet-PalaceBD/assets/index-SyUAKJkC.css';
+        document.head.appendChild(l);
+      }
+    </script>
   </body>
 </html>
 

@@ -1,0 +1,7 @@
+{
+  "name": "Pet Palace",
+  "description": "Premium Pet Food & Animal Supplies E-commerce in Bangladesh. Royal nutrition and care for pets and livestock with BDT currency, bilingual support, and fast nationwide delivery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

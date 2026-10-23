@@ -17,7 +17,8 @@ import {
   BIRD_AVATAR_IMAGE, 
   FISH_AVATAR_IMAGE, 
   RABBIT_AVATAR_IMAGE, 
-  FARM_COW_AVATAR_IMAGE 
+  FARM_COW_AVATAR_IMAGE,
+  PET_PALACE_EMBLEM
 } from '../data/products';
 
 export const Header: React.FC = () => {
@@ -77,16 +78,21 @@ export const Header: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-12 text-[12px] font-normal tracking-tight text-[#1D1D1F]">
             
-            {/* Brand Logo (Apple-style minimalist glyph + wordmark) */}
+            {/* Brand Logo with Royal Pet-Palace Emblem */}
             <button
               onClick={() => handleNavClick('home')}
-              className="flex items-center gap-2 group focus:outline-none"
+              className="flex items-center gap-2.5 group focus:outline-none"
               aria-label="Pet Palace Home"
+              id="header-brand-logo"
             >
-              <div className="w-6 h-6 rounded-md bg-[#1D1D1F] text-amber-300 flex items-center justify-center text-xs group-hover:scale-105 transition-transform">
-                🐾
+              <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-amber-500/60 shadow-sm flex items-center justify-center group-hover:scale-108 group-hover:border-amber-500 transition-all duration-300 bg-[#0D0B14] shrink-0">
+                <img 
+                  src={PET_PALACE_EMBLEM} 
+                  alt="Pet-Palace BD Logo" 
+                  className="w-full h-full object-cover object-center"
+                />
               </div>
-              <span className="font-semibold text-sm tracking-tight text-[#1D1D1F] group-hover:opacity-80 transition-opacity font-serif">
+              <span className="font-bold text-sm tracking-tight text-[#1D1D1F] group-hover:opacity-80 transition-opacity font-serif">
                 {t('brandName')}
               </span>
             </button>
@@ -275,6 +281,19 @@ export const Header: React.FC = () => {
         <div className="md:hidden fixed inset-0 top-24 z-50 bg-[#1D1D1F]/30 backdrop-blur-sm flex">
           <div className="w-3/4 max-w-xs bg-white h-full p-6 shadow-2xl flex flex-col justify-between overflow-y-auto animate-in slide-in-from-left duration-200">
             <div className="space-y-4">
+              <div className="flex items-center gap-3 pb-3 border-b border-black/[0.08]">
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-amber-500/70 shadow-sm bg-[#0D0B14] shrink-0">
+                  <img 
+                    src={PET_PALACE_EMBLEM} 
+                    alt="Pet-Palace BD Emblem" 
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm text-[#1D1D1F] font-serif leading-tight">{t('brandName')}</h3>
+                  <p className="text-[10px] text-amber-700 font-medium">Happy Pets • Healthier Lives</p>
+                </div>
+              </div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#86868B]">
                 Navigation
               </span>

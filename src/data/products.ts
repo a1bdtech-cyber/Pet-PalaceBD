@@ -12,6 +12,7 @@ export const STORE_SETTINGS: StoreSettings = {
 };
 
 import HERO_BANNER_IMAGE from '../assets/images/hero_pet_palace_1792590998117.jpg';
+import PET_PALACE_EMBLEM from '../assets/images/pet_palace_royal_emblem.jpg';
 import CAT_SALMON_IMAGE from '../assets/images/cat_nutrition_salmon_1792590998960.jpg';
 import DOG_KIBBLE_IMAGE from '../assets/images/dog_royal_kibble_1792590999978.jpg';
 import FARM_FEED_IMAGE from '../assets/images/farm_livestock_feed_1792590999553.jpg';
@@ -25,6 +26,7 @@ import FARM_COW_AVATAR_IMAGE from '../assets/images/category_farm_cow_real_17926
 
 export {
   HERO_BANNER_IMAGE,
+  PET_PALACE_EMBLEM,
   CAT_SALMON_IMAGE,
   DOG_KIBBLE_IMAGE,
   FARM_FEED_IMAGE,

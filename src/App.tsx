@@ -21,11 +21,16 @@ import { ToastContainer } from './components/ToastContainer';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
 
+import { WelcomeScreen } from './components/WelcomeScreen';
+
 const AppContent: React.FC = () => {
   const { activeView } = useApp();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F5F5F7] pb-24 sm:pb-28 lg:pb-0 overflow-x-hidden text-[#1D1D1F]">
+      {/* Fullscreen Animated Welcome Screen Intro */}
+      <WelcomeScreen />
+
       {/* Top Header with Apple Store Navigation & Category Ribbon */}
       {activeView !== 'admin' && <Header />}
 

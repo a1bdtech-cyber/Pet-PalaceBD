@@ -108,12 +108,18 @@ export const WelcomeScreen: React.FC = () => {
 
           {/* The Masterpiece Royal Emblem Image - Extra Large Display */}
           <img
-            src={royalEmblemImg || '/images/pet-palace-welcome.jpg'}
+            src={royalEmblemImg || `${import.meta.env.BASE_URL}images/pet-palace-welcome.jpg`}
             alt="Pet-Palace BD Royal Emblem - Happy Pets Healthier Lives"
             className="w-full max-h-[75vh] sm:max-h-[82vh] md:max-h-[85vh] object-contain drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)] filter contrast-[1.05] brightness-[1.03] pointer-events-none"
             loading="eager"
             decoding="sync"
             fetchPriority="high"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (!target.src.includes('pet-palace-welcome.jpg')) {
+                target.src = `${import.meta.env.BASE_URL}images/pet-palace-welcome.jpg`;
+              }
+            }}
           />
         </div>
 

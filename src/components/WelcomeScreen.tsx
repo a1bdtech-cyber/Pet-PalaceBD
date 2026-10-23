@@ -41,7 +41,7 @@ export const WelcomeScreen: React.FC = () => {
     }
 
     setIsDismissing(true);
-    // 850ms silky smooth transition matching header logo landing
+    // 850ms silky smooth upward slide transition
     const timer = setTimeout(() => {
       setIsVisible(false);
     }, 850);
@@ -68,7 +68,7 @@ export const WelcomeScreen: React.FC = () => {
       aria-label="Pet-Palace BD স্বাগতম - ওয়েবসাইটে প্রবেশ করতে টাচ অথবা ক্লিক করুন"
       onClick={handleDismiss}
       onKeyDown={handleKeyDown}
-      className={`fixed inset-0 z-[100] w-full h-[100dvh] min-h-screen select-none overflow-hidden cursor-pointer outline-none bg-black/45 backdrop-blur-md ${
+      className={`fixed inset-0 z-[100] w-screen h-[100dvh] max-h-[100dvh] select-none overflow-hidden cursor-pointer outline-none bg-neutral-950 flex flex-col justify-between ${
         isDismissing ? 'pointer-events-none' : ''
       }`}
       style={{
@@ -80,109 +80,88 @@ export const WelcomeScreen: React.FC = () => {
         willChange: 'transform',
       }}
     >
-      {/* Translucent ambient overlay allowing the underlying homepage to softly peek through */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/65 pointer-events-none" />
-
-      {/* Main Artwork Stage: Extra large royal emblem with smooth flight transition into header logo */}
-      <div className="relative w-full h-full flex flex-col items-center justify-center p-2 sm:p-6">
-        
-        {/* Emblem Hero Container - Much larger sizing to fill the viewport majestically */}
-        <div
-          className="relative max-w-6xl w-[96vw] sm:w-[92vw] flex items-center justify-center transition-all"
-          style={{
-            transform: isDismissing
-              ? 'translate3d(-36vw, -44vh, 0) scale(0.06)'
-              : 'translate3d(0, 0, 0) scale(1)',
-            opacity: isDismissing ? 0.35 : 1,
-            transition: prefersReducedMotion
-              ? 'opacity 200ms ease'
-              : 'transform 820ms cubic-bezier(0.76, 0, 0.24, 1), opacity 780ms ease-in',
-            willChange: 'transform, opacity',
+      {/* 1. Full-Screen Royal Image: Fills 100% of the screen on both mobile and desktop */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <img
+          src={royalEmblemImg || `${import.meta.env.BASE_URL}images/pet-palace-welcome.jpg`}
+          alt="Pet-Palace BD Royal Welcome Screen"
+          className="w-full h-full object-cover object-center pointer-events-none"
+          loading="eager"
+          decoding="sync"
+          fetchPriority="high"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (!target.src.includes('pet-palace-welcome.jpg')) {
+              target.src = `${import.meta.env.BASE_URL}images/pet-palace-welcome.jpg`;
+            }
           }}
-        >
-          {/* Subtle golden halo glow behind the huge emblem */}
-          <div 
-            className="absolute -inset-4 sm:-inset-10 rounded-3xl bg-amber-500/20 blur-3xl pointer-events-none transition-opacity duration-500"
-            style={{ opacity: isDismissing ? 0 : 1 }}
-          />
+        />
 
-          {/* The Masterpiece Royal Emblem Image - Extra Large Display */}
-          <img
-            src={royalEmblemImg || `${import.meta.env.BASE_URL}images/pet-palace-welcome.jpg`}
-            alt="Pet-Palace BD Royal Emblem - Happy Pets Healthier Lives"
-            className="w-full max-h-[75vh] sm:max-h-[82vh] md:max-h-[85vh] object-contain drop-shadow-[0_25px_60px_rgba(0,0,0,0.95)] filter contrast-[1.05] brightness-[1.03] pointer-events-none"
-            loading="eager"
-            decoding="sync"
-            fetchPriority="high"
-            onError={(e) => {
-              const target = e.currentTarget;
-              if (!target.src.includes('pet-palace-welcome.jpg')) {
-                target.src = `${import.meta.env.BASE_URL}images/pet-palace-welcome.jpg`;
-              }
-            }}
-          />
+        {/* Balanced elegant gradient overlays: guarantees crystal readability for top & bottom text while keeping artwork vibrant */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/85 pointer-events-none" />
+      </div>
+
+      {/* 2. Top Royal Branding Badge (flex-shrink-0 to prevent clipping) */}
+      <header className="relative z-10 w-full flex-shrink-0 pt-3 sm:pt-5 px-4 flex justify-center pointer-events-none transition-opacity duration-300"
+        style={{ opacity: isDismissing ? 0 : 1 }}
+      >
+        <div className="px-3.5 sm:px-5 py-1.5 rounded-full bg-black/65 backdrop-blur-xl border border-amber-400/40 text-amber-200 text-[11px] sm:text-xs tracking-wider uppercase font-semibold shadow-2xl flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+          <span>Pet-Palace BD • প্রিমিয়াম পেট কেয়ার</span>
         </div>
+      </header>
 
-        {/* Top Subtle Royal Crest / Badge */}
-        <div 
-          className="absolute top-4 sm:top-6 inset-x-0 flex justify-center pointer-events-none transition-opacity duration-300"
-          style={{ opacity: isDismissing ? 0 : 1 }}
-        >
-          <div className="px-4 py-1.5 rounded-full bg-black/65 backdrop-blur-xl border border-amber-500/40 text-amber-200 text-[11px] sm:text-xs tracking-wider uppercase font-medium shadow-2xl flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-            <span>Pet-Palace BD • প্রিমিয়াম পেট কেয়ার</span>
+      {/* 3. Center Space (flex-1 min-h-0 absorbs height dynamically on any screen/zoom level) */}
+      <main className="relative z-10 flex-1 min-h-0 w-full pointer-events-none" />
+
+      {/* 4. Bottom Interactive Prompt Banner (flex-shrink-0, safe-area-inset protected, guaranteed never cut off) */}
+      <footer 
+        className="relative z-10 w-full flex-shrink-0 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 px-3 sm:px-6 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-300"
+        style={{ opacity: isDismissing ? 0 : 1 }}
+      >
+        {/* Animated Tap/Click Pill Button */}
+        <div className="flex items-center gap-2.5 sm:gap-4 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-black/80 hover:bg-black/90 active:scale-95 backdrop-blur-2xl border border-amber-400/50 text-white shadow-[0_12px_45px_rgba(0,0,0,0.85)] transition-all duration-300 max-w-lg w-auto">
+          {/* Animated Upward Wave Indicator */}
+          <div className="flex flex-col items-center justify-center -space-y-1 animate-bounce flex-shrink-0">
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 transform -rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+            </svg>
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5 text-amber-100/70 transform -rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
-        </div>
 
-        {/* Bottom Interactive Prompt Banner */}
-        <div 
-          className="absolute bottom-6 sm:bottom-8 inset-x-0 flex flex-col items-center justify-center px-4 text-center pointer-events-none z-10 transition-opacity duration-300"
-          style={{ opacity: isDismissing ? 0 : 1 }}
-        >
-          {/* Animated Tap/Click Pill Button with Translucent Glass */}
-          <div className="group flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-black/70 hover:bg-black/85 active:scale-95 backdrop-blur-2xl border border-amber-400/40 text-white shadow-[0_12px_45px_rgba(0,0,0,0.85)] transition-all duration-300">
-            {/* Animated Upward Wave Indicator */}
-            <div className="flex flex-col items-center justify-center -space-y-1.5 animate-bounce">
-              <svg
-                className="w-4 h-4 text-amber-300 transform -rotate-180"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
-              <svg
-                className="w-4 h-4 text-amber-100/70 transform -rotate-180"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-
-            <div className="flex flex-col items-start text-left">
-              <span className="text-sm sm:text-base font-bold tracking-tight text-white drop-shadow-md">
-                টাচ করুন অথবা ক্লিক করুন
-              </span>
-              <span className="text-[11px] sm:text-xs text-amber-300/90 font-medium">
-                ওয়েবসাইটে প্রবেশ করতে ট্যাপ করুন • Tap anywhere to enter
-              </span>
-            </div>
-
-            <span className="ml-1 px-3 py-1 text-[11px] font-bold bg-amber-400 text-neutral-950 rounded-full uppercase tracking-wider shadow-sm flex items-center gap-1">
-              <span>Enter</span>
-              <span>→</span>
+          <div className="flex flex-col items-start text-left min-w-0">
+            <span className="text-sm sm:text-base font-bold tracking-tight text-white drop-shadow-md leading-snug">
+              টাচ করুন অথবা ক্লিক করুন
+            </span>
+            <span className="text-[10px] sm:text-xs text-amber-300/90 font-medium leading-snug">
+              ওয়েবসাইটে প্রবেশ করতে ট্যাপ করুন • Tap to enter
             </span>
           </div>
 
-          {/* Footnote reassurance */}
-          <p className="mt-2 text-xs text-white/80 drop-shadow-md font-medium">
-            বাংলাদেশে বিশ্বস্ততম পোষা প্রাণী ও খামার খাদ্য সরবরাহকারী
-          </p>
+          <span className="ml-1 px-3 py-1 text-[11px] sm:text-xs font-bold bg-amber-400 hover:bg-amber-300 text-neutral-950 rounded-full uppercase tracking-wider shadow-md flex items-center gap-1 flex-shrink-0">
+            <span>Enter</span>
+            <span className="font-extrabold">→</span>
+          </span>
         </div>
 
-      </div>
+        {/* Footnote reassurance */}
+        <p className="mt-1.5 text-[10px] sm:text-xs text-amber-100/80 drop-shadow-md font-medium text-center leading-tight">
+          বাংলাদেশে বিশ্বস্ততম পোষা প্রাণী ও খামার খাদ্য সরবরাহকারী
+        </p>
+      </footer>
     </aside>
   );
 };
+
